@@ -29,7 +29,7 @@ If you'd like to take part, please follow the guide.
 * Create a Pull Request on DAGsHub!
 * 🐶
 ### TODO:
-[] Web UI
-[] Testing various datasets as basis for training
-[] Testing various models for the data
-[] Adding qualitative tests for model performance (visually comparing 3d image outputs)
+- [ ] Web UI
+- [ ] Testing various datasets as basis for training
+- [ ] Testing various models for the data
+- [ ] Adding qualitative tests for model performance (visually comparing 3d image outputs)
