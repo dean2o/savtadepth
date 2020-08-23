@@ -1,0 +1,4 @@
+[core]
+    analytics = false
+['remote "dvc-remote"']
+    url = s3://dagshub-savta-depth
