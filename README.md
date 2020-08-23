@@ -37,6 +37,7 @@ If you'd like to take part, please follow the guide.
     $ dvc checkout #use this to get the data, models etc
     ```
 
+    * Note: you might need to install and setup the tools to pull from a remote. Read more in [this guide](https://dagshub.com/docs/getting-started/set-up-remote-storage-for-data-and-models/).
 * After you are finished your modification, make sure to do the following:
     * Freeze your virtualenv by typing in the terminal:
 
