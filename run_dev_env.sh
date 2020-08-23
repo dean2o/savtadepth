@@ -1,10 +1,7 @@
-docker run --rm -p 8888:8888 \
-  --ipc=host \
-  --volume="$PWD:/workspace" \
-  savta_depth_dev jupyter lab \
-    --ip=0.0.0.0 \
-    --port=8888 \
-    --allow-root \
-    --no-browser \
-    --NotebookApp.token='' \
-    --NotebookApp.password=''
+docker run -d \
+    -p 8080:8080 \
+    --name "ml-workspace" -v "${PWD}:/workspace" \
+    --env AUTHENTICATE_VIA_JUPYTER="dagshub_savta" \
+    --shm-size 512m \
+    --restart always \
+    mltooling/ml-workspace:latest

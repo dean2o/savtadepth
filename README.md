@@ -14,20 +14,40 @@ If you'd like to take part, please follow the guide.
 * Next, clone the repository you just forked by typing the following command in your terminal:
   ```bash
   $ git clone https://dagshub.com/<your-dagshub-username>/SavtaDepth.git
-  $ dvc checkout #use this to get the data, models etc
   ```
-* To get your environment up and running docker is the best way to go.
-  We created a dockerfile that has all you need in it and will install all requirements in the 'requirements.txt' file as well as run a jupyter lab instance.
-    * Just open the terminal in your project directory and type `docker build "savta_depth_dev" ."
-    * After the docker image is created run the following commands:
+* To get your environment up and running docker is the best way to go. We use an instance of [MLWorkspace](https://github.com/ml-tooling/ml-workspace). 
+    * You can Just run the following commands to get it started.
+
+        ```bash
+        $ chmod +x run_dev_env.sh
+        $ ./run_dev_env.sh
+        ```
+
+    * Open localhost:8080 to see the workspace you have created. You will be asked for a token – enter `dagshub_savta`
+    * In the top right you have a menu called `Open Tool`. Click that button and choose terminal (alternatively open VSCode and open terminal there) and type in the following commands to install a virtualenv and dependencies:
+
+        ```bash
+        $ make env
+        $ conda activate savta_depth
+        $ make requirements
+        ```
+* Pull the dvc files to your workspace by typing:
+
     ```bash
-    $ chmod +x run_dev_env.sh
-    $ ./run_dev_env.sh
+    $ dvc checkout #use this to get the data, models etc
     ```
-    * Open localhost:8888 and you are good to go
-* After you are finished your modification, don't forget to push your code to DAGsHub, and your dvc managed files to your dvc remote. In order to setup a dvc remote please refer to [this guide](https://dagshub.com/docs/getting-started/set-up-remote-storage-for-data-and-models/).
-* Create a Pull Request on DAGsHub!
-* 🐶
+
+* After you are finished your modification, make sure to do the following:
+    * Freeze your virtualenv by typing in the terminal:
+
+        ```bash
+        pip freeze > requirements.txt
+        ```
+
+    * Push your code to DAGsHub, and your dvc managed files to your dvc remote. In order to setup a dvc remote please refer to [this guide](https://dagshub.com/docs/getting-started/set-up-remote-storage-for-data-and-models/).
+    * Create a Pull Request on DAGsHub!
+    * 🐶
+
 ### TODO:
 - [ ] Web UI
 - [ ] Testing various datasets as basis for training
