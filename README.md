@@ -31,13 +31,20 @@ If you'd like to take part, please follow the guide.
         $ conda activate savta_depth
         $ make requirements
         ```
+
+        **Note**: If you don't have a GPU you will need to install pytorch separately and then run make requirements. You can install pytorch for computers without a gpu with the following command:
+
+        ```bash
+        $ conda install pytorch torchvision cpuonly -c pytorch
+        ```
+        
 * Pull the dvc files to your workspace by typing:
 
     ```bash
     $ dvc checkout #use this to get the data, models etc
     ```
 
-    * Note: you might need to install and setup the tools to pull from a remote. Read more in [this guide](https://dagshub.com/docs/getting-started/set-up-remote-storage-for-data-and-models/).
+    **Note**: You might need to install and setup the tools to pull from a remote. Read more in [this guide](https://dagshub.com/docs/getting-started/set-up-remote-storage-for-data-and-models/) on how to setup Google Storage or AWS S3 access.
 * After you are finished your modification, make sure to do the following:
     * Freeze your virtualenv by typing in the terminal:
 
