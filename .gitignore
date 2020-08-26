@@ -5,3 +5,4 @@
 .workspace/
 aws/
 google-cloud-sdk
+__pycache__/

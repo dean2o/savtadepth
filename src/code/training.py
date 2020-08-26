@@ -1,6 +1,7 @@
 import torch
 import sys
-from fastai.vision import unet_learner, ImageImageList, models, Path, root_mean_squared_error
+from fastai2.vision.all import *
+from torchvision.utils import save_image
 
 
 def get_y_fn(x):
@@ -10,16 +11,16 @@ def get_y_fn(x):
     return y
 
 
-def create_databunch(data_path):
-    data = (ImageImageList.from_folder(data_path)
-            .filter_by_func(lambda fname: fname.suffix == '.jpg')
-            .split_by_folder(train='train', valid='test')
-            .label_from_func(get_y_fn).databunch()).normalize()
+def create_data(data_path):
+    fnames = get_files(data_path/'train', extensions='.jpg')
+    data = SegmentationDataLoaders.from_label_func(data_path/'train', fnames=fnames, label_func=get_y_fn)
     return data
 
 
 def train(data):
-    learner = unet_learner(data, models.resnet34, metrics=root_mean_squared_error, wd=1e-2, loss_func=torch.nn.SmoothL1Loss())
+    data.num_workers = 0
+    data.bs = 1
+    learner = unet_learner(data, resnet34, metrics=rmse, wd=1e-2, n_out=1, loss_func=torch.nn.SmoothL1Loss())
     learner.fit_one_cycle(1, 1e-3)
 
 
@@ -28,7 +29,7 @@ if __name__ == "__main__":
         print("usage: %s <data_path> <out_folder>" % sys.argv[0], file=sys.stderr)
         sys.exit(0)
 
-    data = create_databunch(sys.argv[1])
+    data = create_data(Path(sys.argv[1]))
     data.batch_size = 1
     data.num_workers = 0
     learner = train(data)

@@ -28,8 +28,8 @@ If you'd like to take part, please follow the guide.
 
         ```bash
         $ make env
-        $ conda activate savta_depth
-        $ make requirements
+        $ source activate savta_depth
+        $ make load_requirements
         ```
 
         **Note**: If you don't have a GPU you will need to install pytorch separately and then run make requirements. You can install pytorch for computers without a gpu with the following command:
@@ -49,7 +49,7 @@ If you'd like to take part, please follow the guide.
     * Freeze your virtualenv by typing in the terminal:
 
         ```bash
-        pip freeze > requirements.txt
+        $ make save_requirements
         ```
 
     * Push your code to DAGsHub, and your dvc managed files to your dvc remote. In order to setup a dvc remote please refer to [this guide](https://dagshub.com/docs/getting-started/set-up-remote-storage-for-data-and-models/).

@@ -27,7 +27,11 @@ else
 	@echo ">>> New virtual env created. Activate with:\nsource env/bin/activate ."
 endif
 
-requirements:
+load_requirements:
 	@echo ">>> Installing requirements. Make sure your virtual environment is activated."
 	$(PYTHON_INTERPRETER) -m pip install -U pip setuptools wheel
 	$(PYTHON_INTERPRETER) -m pip install -r requirements.txt
+
+save_requirements:
+	@echo ">>> Saving requirements."
+	pip list --format=freeze > requirements.txt
