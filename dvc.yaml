@@ -8,3 +8,10 @@ stages:
     - src/data/raw/splits.mat
     outs:
     - src/data/processed/
+  train:
+    cmd: python3 src/code/training.py src/data/processed src/models
+    deps:
+    - src/code/training.py
+    - src/data/processed/
+    outs:
+    - src/models/
