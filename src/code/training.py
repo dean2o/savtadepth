@@ -13,15 +13,13 @@ def get_y_fn(x):
 
 def create_data(data_path):
     fnames = get_files(data_path/'train', extensions='.jpg')
-    data = SegmentationDataLoaders.from_label_func(data_path/'train', fnames=fnames, label_func=get_y_fn)
+    data = SegmentationDataLoaders.from_label_func(data_path/'train',  bs=1, num_workers=0, fnames=fnames, label_func=get_y_fn)
     return data
 
 
 def train(data):
-    data.num_workers = 0
-    data.bs = 1
     learner = unet_learner(data, resnet34, metrics=rmse, wd=1e-2, n_out=1, loss_func=torch.nn.SmoothL1Loss())
-    learner.fit_one_cycle(1, 1e-3)
+    learner.fine_tune(8)
 
 
 if __name__ == "__main__":
