@@ -29,14 +29,23 @@ If you'd like to take part, please follow the guide.
         ```bash
         $ make env
         $ source activate savta_depth
-        $ make load_requirements
         ```
-
+        
+        Now when we have an environment, let's install all of the required libraries.
+        
         **Note**: If you don't have a GPU you will need to install pytorch separately and then run make requirements. You can install pytorch for computers without a gpu with the following command:
 
         ```bash
         $ conda install pytorch torchvision cpuonly -c pytorch
         ```
+        
+        To install the required libraries run the following command:
+        
+        ```bash
+        $ make load_requirements
+        ```
+
+
         
 * Pull the dvc files to your workspace by typing:
 
