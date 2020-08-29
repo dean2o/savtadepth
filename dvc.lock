@@ -11,3 +11,13 @@ process_data:
   outs:
   - path: src/data/processed/
     md5: 78d932b016048d527f9e73e1781127cd.dir
+train:
+  cmd: python3 src/code/training.py src/data/processed
+  deps:
+  - path: src/code/training.py
+    md5: d36fea3f2f8524ea040fe7330ce8ba40
+  - path: src/data/processed/
+    md5: 78d932b016048d527f9e73e1781127cd.dir
+  outs:
+  - path: src/models/
+    md5: 48f953dd81c67ea0f6958fe4e4226e01.dir
