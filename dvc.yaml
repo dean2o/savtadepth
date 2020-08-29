@@ -9,7 +9,7 @@ stages:
     outs:
     - src/data/processed/
   train:
-    cmd: python3 src/code/training.py src/data/processed src/models
+    cmd: python3 src/code/training.py src/data/processed
     deps:
     - src/code/training.py
     - src/data/processed/

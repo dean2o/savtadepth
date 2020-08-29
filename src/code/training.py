@@ -17,20 +17,13 @@ def create_data(data_path):
     return data
 
 
-def train(data):
-    learner = unet_learner(data, resnet34, metrics=rmse, wd=1e-2, n_out=1, loss_func=MSELossFlat())
-    learner.fine_tune(1)
-
-
 if __name__ == "__main__":
-    if len(sys.argv) < 3:
-        print("usage: %s <data_path> <out_folder>" % sys.argv[0], file=sys.stderr)
+    if len(sys.argv) < 2:
+        print("usage: %s <data_path>" % sys.argv[0], file=sys.stderr)
         sys.exit(0)
 
     data = create_data(Path(sys.argv[1]))
-    data.batch_size = 1
-    data.num_workers = 0
-    learner = train(data)
+    learner = unet_learner(data, resnet34, metrics=rmse, wd=1e-2, n_out=1, loss_func=MSELossFlat(), path='src/')
+    learner.fine_tune(1)
 
-    learner.save(sys.argv[2])
-    learner.show_results()
+    learner.save('model')
