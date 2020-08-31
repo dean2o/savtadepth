@@ -44,7 +44,9 @@ import cv2
 def convert_image(i, scene, depth, image, folder):
     img_depth = depth * 1000.0
     img_depth_uint16 = img_depth.astype(np.uint16)
-    cv2.imwrite("%s/%05d_depth.png" % (folder, i), img_depth_uint16)
+    normalized_depth = np.zeros(img_depth_uint16.shape)
+    normalized_depth = cv2.normalize(img_depth_uint16,  normalized_depth, 0, 255, cv2.NORM_MINMAX)
+    cv2.imwrite("%s/%05d_depth.png" % (folder, i), normalized_depth)
 
     image = image[:, :, ::-1]
     image_black_boundary = np.zeros((480, 640, 3), dtype=np.uint8)
