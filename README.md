@@ -50,6 +50,7 @@ If you'd like to take part, please follow the guide.
 * Pull the dvc files to your workspace by typing:
 
     ```bash
+    $ dvc pull -r dvc-remote
     $ dvc checkout #use this to get the data, models etc
     ```
 
