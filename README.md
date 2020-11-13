@@ -12,6 +12,7 @@ If you'd like to take part, please follow the guide.
 ### Setting up your environment to contribute
 * To get started, fork the repository on DAGsHub
 * Now, you have 3 way to set up your environment: Google Colab, local or docker. If you're not sure which one to go with, we recommend using Colab.
+
 #### Google Colab
 Google Colab can be looked at as your web connected, GPU powered IDE. Below is a link to a well-documented Colab notebook, that will load the code and data from this repository, enabling you to modify the code and re-run training. Notice that you still need to modify the code within the `src/code/` folder, adding cells should be used only for testing things out.
 
@@ -117,7 +118,7 @@ This notebook is also a part of this project, in case it needs modification, in 
 * 🐶
 
 ### TODO:
-[ ] Web UI
-[ ] Testing various datasets as basis for training
-[ ] Testing various models for the data
-[ ] Adding qualitative tests for model performance (visually comparing 3d image outputs)
+- [ ] Web UI
+- [ ] Testing various datasets as basis for training
+- [ ] Testing various models for the data
+- [ ] Adding qualitative tests for model performance (visually comparing 3d image outputs)
