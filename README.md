@@ -117,7 +117,7 @@ This notebook is also a part of this project, in case it needs modification, in 
 * 🐶
 
 ### TODO:
-[ ] Web UI
-[ ] Testing various datasets as basis for training
-[ ] Testing various models for the data
-[ ] Adding qualitative tests for model performance (visually comparing 3d image outputs)
+- [ ] Web UI
+- [ ] Testing various datasets as basis for training
+- [ ] Testing various models for the data
+- [ ] Adding qualitative tests for model performance (visually comparing 3d image outputs)
