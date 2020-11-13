@@ -11,6 +11,13 @@ If you'd like to take part, please follow the guide.
 
 ### Setting up your environment to contribute
 * To get started, fork the repository on DAGsHub
+* Now, You have 3 way to set up your environment: Google Colab, local or docker. If you're not sure which one to go with, we recommend using Colab.
+#### Google Colab
+We can treat Colab, as your web connected, GPU powered IDE. Here is a link to a well-documented Colab notebook, that will load the code and data from this repository, enabling you to modify the code and re-run training.
+
+**_NOTE: The downside of this method (if you are not familiar with Colab) is that Google Colab will limit the amount of time an instance can be live, so you might be limited in your ability to train models for longer periods of time. 
+#### Local
+#### Docker
 * Next, clone the repository you just forked by typing the following command in your terminal:
   ```bash
   $ git clone https://dagshub.com/<your-dagshub-username>/SavtaDepth.git
@@ -67,7 +74,7 @@ If you'd like to take part, please follow the guide.
     * 🐶
 
 ### TODO:
-- [ ] Web UI
-- [ ] Testing various datasets as basis for training
-- [ ] Testing various models for the data
-- [ ] Adding qualitative tests for model performance (visually comparing 3d image outputs)
+[ ] Web UI
+[ ] Testing various datasets as basis for training
+[ ] Testing various models for the data
+[ ] Adding qualitative tests for model performance (visually comparing 3d image outputs)
