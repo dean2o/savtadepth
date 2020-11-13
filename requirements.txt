@@ -17,7 +17,7 @@ decorator==4.4.2
 dictdiffer==0.8.1
 distro==1.5.0
 dpath==2.0.1
-dvc==1.6.0
+dvc==1.9.1
 fastai==2.0.0
 fastcore==1.0.0
 fastprogress==1.0.0
@@ -38,6 +38,7 @@ grandalf==0.6
 h5py==2.10.0
 idna==2.10
 importlib-metadata==1.7.0
+ipykernel==5.3.4
 ipython==7.17.0
 ipython-genutils==0.2.0
 jedi==0.17.2
@@ -45,8 +46,6 @@ joblib==0.16.0
 jsonpath-ng==1.5.1
 kiwisolver==1.2.0
 matplotlib==3.3.1
-mkl-random==1.1.1
-mkl-service==2.3.0
 murmurhash==1.0.2
 nanotime==0.5.2
 networkx==2.4
