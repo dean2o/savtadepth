@@ -25,6 +25,10 @@ In order to edit code files, you must save the notebook to your drive. You can d
 This notebook is also a part of this project, in case it needs modification, in the `Notebooks` folder. You should not commit your version unless your contribution is an improvement to the environment.
 
 #### Local
+* Clone the repository you just forked by typing the following command in your terminal:
+  ```bash
+  $ git clone https://dagshub.com/<your-dagshub-username>/SavtaDepth.git
+  ```
 * Create a virtual environment or Conda environment and activate it
     ```bash
     # Create the virtual environment
@@ -60,7 +64,7 @@ This notebook is also a part of this project, in case it needs modification, in 
     * Push your code to DAGsHub, and your dvc managed files to your dvc remote. To setup a dvc remote please refer to [this guide](https://dagshub.com/docs/getting-started/set-up-remote-storage-for-data-and-models/).
     
 #### Docker
-* Next, clone the repository you just forked by typing the following command in your terminal:
+* Clone the repository you just forked by typing the following command in your terminal:
   ```bash
   $ git clone https://dagshub.com/<your-dagshub-username>/SavtaDepth.git
   ```
