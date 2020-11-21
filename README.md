@@ -4,6 +4,12 @@ Savta Depth is a collaborative *O*pen *S*ource *D*ata *S*cience project for mono
 Here you will find the code for the project, but also the data, models, pipelines and experiments. This means that the project is easily reproducible on any machine, but also that you can contribute to it as a data scientist.
 
 Have a great idea for how to improve the model? Want to add data and metrics to make it more explainable/fair? We'd love to get your help.
+## Demo
+**You can use [this notebook](https://colab.research.google.com/drive/1XU4DgQ217_hUMU1dllppeQNw3pTRlHy1?usp=sharing) to load a model from the project and run it on an image you uploaded, to get the depth map. Once it has been saved, you can download it to use on platforms that support it (e.g. Facebook) to create 3d photos.**
+
+![](https://i.ibb.co/r20HKpQ/savtadepthex.png)
+
+\>\> **[Demo Notebook](https://colab.research.google.com/drive/1XU4DgQ217_hUMU1dllppeQNw3pTRlHy1?usp=sharing)** \<\<
 
 ## Contributing Guide
 Here we'll list things we want to work on in the project as well as ways to start contributing.
@@ -16,9 +22,12 @@ If you'd like to take part, please follow the guide.
 #### Google Colab
 Google Colab can be looked at as your web connected, GPU powered IDE. Below is a link to a well-documented Colab notebook, that will load the code and data from this repository, enabling you to modify the code and re-run training. Notice that you still need to modify the code within the `src/code/` folder, adding cells should be used only for testing things out.
 
+**You can also use this notebook to load a model from the project and run it on an image you uploaded, to get the depth map. Once it has been saved, you can download it to use on platforms that support it (e.g. Facebook) to create 3d photos.**
+
+
 In order to edit code files, you must save the notebook to your drive. You can do this by typing `ctrl+s` or `cmd+s` on mac.
 
-\>\> **[SavtaDepth Colab Environment](https://colab.research.google.com/drive/19027P09jiiN1C99-YGk4FPj0Ol9iXUIU?usp=sharing)** \<\<
+\>\> **[SavtaDepth Colab Environment](https://colab.research.google.com/drive/1XU4DgQ217_hUMU1dllppeQNw3pTRlHy1?usp=sharing)** \<\<
 
 **_NOTE: The downside of this method (if you are not familiar with Colab) is that Google Colab will limit the amount of time an instance can be live, so you might be limited in your ability to train models for longer periods of time._**
 
@@ -26,9 +35,11 @@ This notebook is also a part of this project, in case it needs modification, in 
 
 #### Local
 * Clone the repository you just forked by typing the following command in your terminal:
-  ```bash
-  $ git clone https://dagshub.com/<your-dagshub-username>/SavtaDepth.git
-  ```
+
+    ```bash
+    $ git clone https://dagshub.com/<your-dagshub-username>/SavtaDepth.git
+    ```
+  
 * Create a virtual environment or Conda environment and activate it
     ```bash
     # Create the virtual environment
@@ -49,25 +60,22 @@ This notebook is also a part of this project, in case it needs modification, in 
 * Pull the dvc files to your workspace by typing:
 
     ```bash
-    $ dvc pull -r dvc-remote
+    $ dvc pull -r origin
     $ dvc checkout #use this to get the data, models etc
     ```
 
-    **Note**: You might need to install and setup the tools to pull from a remote. Read more in [this guide](https://dagshub.com/docs/getting-started/set-up-remote-storage-for-data-and-models/) on how to setup Google Storage or AWS S3 access.
 * After you are finished your modification, make sure to do the following:
-    * If you modified packages, make sure to freeze your virtualenv by typing in the terminal:
+    * If you modified packages, make sure to update the `requirements.txt` file accordingly.
 
-        ```bash
-        $ make save_requirements
-        ```
-
-    * Push your code to DAGsHub, and your dvc managed files to your dvc remote. To setup a dvc remote please refer to [this guide](https://dagshub.com/docs/getting-started/set-up-remote-storage-for-data-and-models/).
+    * Push your code to DAGsHub, and your dvc managed files to your dvc remote. For reference on the commands needed, please refer to the Google Colab notebook section – [Commiting Your Work and Pushing Back to DAGsHub](https://colab.research.google.com/drive/1XU4DgQ217_hUMU1dllppeQNw3pTRlHy1?authuser=1#scrollTo=PAxz-29WhN12&line=1&uniqifier=1).
     
 #### Docker
 * Clone the repository you just forked by typing the following command in your terminal:
-  ```bash
-  $ git clone https://dagshub.com/<your-dagshub-username>/SavtaDepth.git
-  ```
+  
+    ```bash
+    $ git clone https://dagshub.com/<your-dagshub-username>/SavtaDepth.git
+    ```
+  
 * To get your environment up and running docker is the best way to go. We use an instance of [MLWorkspace](https://github.com/ml-tooling/ml-workspace). 
     * You can Just run the following commands to get it started.
 
@@ -106,19 +114,17 @@ This notebook is also a part of this project, in case it needs modification, in 
     $ dvc checkout #use this to get the data, models etc
     ```
 
-    **Note**: You might need to install and setup the tools to pull from a remote. Read more in [this guide](https://dagshub.com/docs/getting-started/set-up-remote-storage-for-data-and-models/) on how to setup Google Storage or AWS S3 access.
 * After you are finished your modification, make sure to do the following:
-    * Freeze your virtualenv by typing in the terminal:
+    * If you modified packages, make sure to update the `requirements.txt` file accordingly.
 
-        ```bash
-        $ make save_requirements
-        ```
-
-    * Push your code to DAGsHub, and your dvc managed files to your dvc remote. In order to setup a dvc remote please refer to [this guide](https://dagshub.com/docs/getting-started/set-up-remote-storage-for-data-and-models/).
+    * Push your code to DAGsHub, and your dvc managed files to your dvc remote. For reference on the commands needed, please refer to the Google Colab notebook section – [Commiting Your Work and Pushing Back to DAGsHub](https://colab.research.google.com/drive/1XU4DgQ217_hUMU1dllppeQNw3pTRlHy1?authuser=1#scrollTo=PAxz-29WhN12&line=1&uniqifier=1).
     
 ---
 ### After pushing code and data to DAGsHub
 * Create a Pull Request on DAGsHub!
+    * Explain what changes you are making.
+    * If your changes affect data or models, make sure they are pushed to your DAGsHub dvc remote, and are included in the PR.
+    * We will review your contribution ASAP, and merge it or start a discussion if needed.
 * 🐶
 
 ### TODO:
