@@ -1,7 +1,8 @@
 import torch
 import sys
-from fastai2.vision.all import *
+from fastai.vision.all import *
 from torchvision.utils import save_image
+
 
 class ImageImageDataLoaders(DataLoaders):
     "Basic wrapper around several `DataLoader`s with factory methods for Image to Image problems"
