@@ -1,4 +1,7 @@
 [core]
     analytics = false
+    remote = origin
 ['remote "dvc-remote"']
     url = gs://dagshub-savta-depth
+['remote "origin"']
+    url = https://dagshub.com/OperationSavta/SavtaDepth.dvc
