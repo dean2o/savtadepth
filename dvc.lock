@@ -20,9 +20,14 @@ train:
   cmd: python3 src/code/training.py src/data/processed
   deps:
   - path: src/code/training.py
-    md5: 1d5f2b07b208bf062526e5ebfddca043
+    md5: 9634e85cffa3cf72d3d3d7739e40969e
+    size: 1645
   - path: src/data/processed/
-    md5: 77adb8603dbf31f3b272e0f51b6c2c29.dir
+    md5: d98a9647a37ab431bfa35815eb4afda0.dir
+    size: 232903470
+    nfiles: 2898
   outs:
   - path: src/models/
-    md5: e6f3667c5e3ff28faaf9172adab28107.dir
+    md5: 18d26ed378b1b5ac61425afe153fc076.dir
+    size: 494926829
+    nfiles: 1
