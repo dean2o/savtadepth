@@ -1,4 +1,5 @@
 [core]
     analytics = false
+    remote = dvc-remote
 ['remote "dvc-remote"']
     url = gs://dagshub-savta-depth
