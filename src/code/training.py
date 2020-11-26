@@ -1,6 +1,6 @@
 import torch
 import sys
-from fastai2.vision.all import *
+from fastai.vision.all import *
 from torchvision.utils import save_image
 
 class ImageImageDataLoaders(DataLoaders):
@@ -37,7 +37,8 @@ if __name__ == "__main__":
         sys.exit(0)
 
     data = create_data(Path(sys.argv[1]))
-    learner = unet_learner(data, resnet34, metrics=rmse, wd=1e-2, n_out=3, loss_func=MSELossFlat(), path='src/')
+    learner = unet_learner(data, resnet34, metrics=rmse, wd=1e-2, n_out=3, loss_func=MSELossFlat(), path='src/test/')
+    print("Training model...")
     learner.fine_tune(1)
-
+    print("Saving model...")
     learner.save('model')

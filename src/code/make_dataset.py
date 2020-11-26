@@ -39,13 +39,12 @@ import os
 import scipy.io
 import sys
 import cv2
+from tqdm import tqdm
 
 
 def convert_image(i, scene, depth, image, folder):
-    img_depth = depth * 1000.0
-    img_depth_uint16 = img_depth.astype(np.uint16)
-    normalized_depth = np.zeros(img_depth_uint16.shape)
-    normalized_depth = cv2.normalize(img_depth_uint16,  normalized_depth, 0, 255, cv2.NORM_MINMAX)
+    # depth is given in meters (Kinect has a range of around .5m and 4.5m but can sense also at 8m)
+    normalized_depth = cv2.normalize(depth,  None, 0, 255, cv2.NORM_MINMAX)
     cv2.imwrite("%s/%05d_depth.png" % (folder, i), normalized_depth)
 
     image = image[:, :, ::-1]
@@ -75,12 +74,9 @@ if __name__ == "__main__":
     print("reading", sys.argv[1])
 
     images = h5_file['images']
-    scenes = [u''.join(chr(c) for c in h5_file[obj_ref]) for obj_ref in h5_file['sceneTypes'][0]]
+    scenes = [u''.join(chr(c[0]) for c in h5_file[obj_ref]) for obj_ref in h5_file['sceneTypes'][0]]
 
-    print("processing images")
-    for i, image in enumerate(images):
-        print("image", i + 1, "/", len(images))
-
+    for i, image in tqdm(enumerate(images), desc="processing images", total=len(images)):
         idx = int(i) + 1
         if idx in train_images:
             train_test = "train"
