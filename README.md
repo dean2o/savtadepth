@@ -5,11 +5,11 @@ Here you will find the code for the project, but also the data, models, pipeline
 
 Have a great idea for how to improve the model? Want to add data and metrics to make it more explainable/fair? We'd love to get your help.
 ## Demo
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1XU4DgQ217_hUMU1dllppeQNw3pTRlHy1?usp=sharing)
+
 **You can use [this notebook](https://colab.research.google.com/drive/1XU4DgQ217_hUMU1dllppeQNw3pTRlHy1?usp=sharing) to load a model from the project and run it on an image you uploaded, to get the depth map. Once it has been saved, you can download it to use on platforms that support it (e.g. Facebook) to create 3d photos.**
 
 ![](https://i.ibb.co/r20HKpQ/savtadepthex.png)
-
-\>\> **[Demo Notebook](https://colab.research.google.com/drive/1XU4DgQ217_hUMU1dllppeQNw3pTRlHy1?usp=sharing)** \<\<
 
 ## Contributing Guide
 Here we'll list things we want to work on in the project as well as ways to start contributing.
