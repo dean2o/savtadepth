@@ -3,8 +3,8 @@ process_data:
     src/data/processed
   deps:
   - path: src/code/make_dataset.py
-    md5: fd5076d53909a47ce3b6598c26af6c97
-    size: 3783
+    md5: 3a0dee3a1ba9c587b8ca6ea6f0447ada
+    size: 5227
   - path: src/data/raw/nyu_depth_v2_labeled.mat
     md5: 520609c519fba3ba5ac58c8fefcc3530
     size: 2972037809
@@ -13,8 +13,8 @@ process_data:
     size: 2626
   outs:
   - path: src/data/processed/
-    md5: d98a9647a37ab431bfa35815eb4afda0.dir
-    size: 232903470
+    md5: 38e5a1b51dfd29c0f313779b2f3d4540.dir
+    size: 234696354
     nfiles: 2898
 train:
   cmd: python3 src/code/training.py src/data/processed

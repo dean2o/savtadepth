@@ -6,3 +6,4 @@ deps:
 outs:
 - md5: 08e3c3aea27130ac7c01ffd739a4535f
   path: splits.mat
+  size: 2626

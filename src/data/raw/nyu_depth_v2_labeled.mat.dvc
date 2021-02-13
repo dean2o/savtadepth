@@ -6,3 +6,4 @@ deps:
 outs:
 - md5: 520609c519fba3ba5ac58c8fefcc3530
   path: nyu_depth_v2_labeled.mat
+  size: 2972037809
