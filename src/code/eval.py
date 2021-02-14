@@ -1,5 +1,5 @@
 import sys
-from fastai.vision.all import unet_learner, Path, resnet34, MSELossFlat
+from fastai.vision.all import unet_learner, Path, resnet34, MSELossFlat, get_files, L
 import torch
 from src.code.custom_data_loading import create_data
 from dagshub.fastai import DAGsHubLogger
@@ -39,8 +39,11 @@ if __name__ == "__main__":
         sys.exit(0)
 
     data_path = Path(sys.argv[1])
-    data = create_data(data_path, is_test=True)
+    data = create_data(data_path)
 
+    filenames = get_files(Path(sys.argv[1]), extensions='.jpg')
+    test_files = L([Path(i) for i in filenames])
+    test_dl = data.test_dl(test_files, with_labels=True)
     learner = unet_learner(data,
                            resnet34,
                            n_out=3,
@@ -48,5 +51,5 @@ if __name__ == "__main__":
                            path='src/',
                            model_dir='models')
     learner = learner.load('model')
-    predictions, targets = learner.get_preds()
+    predictions, targets = learner.get_preds(dl=test_dl)
     print(compute_errors(targets, predictions))
