@@ -25,8 +25,8 @@ if __name__ == "__main__":
                            path='src/',
                            model_dir='models',
                            cbs=DAGsHubLogger(
-                               metrics_path="train_metrics.csv",
-                               hparams_path="train_params.yml"
+                               metrics_path="logs/train_metrics.csv",
+                               hparams_path="logs/train_params.yml"
                            ))
 
     print("Training model...")

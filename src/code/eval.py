@@ -1,36 +1,8 @@
 import sys
-from fastai.vision.all import unet_learner, Path, resnet34, MSELossFlat, get_files, L
-import torch
+from fastai.vision.all import unet_learner, Path, resnet34, MSELossFlat, get_files, L, tuplify
 from src.code.custom_data_loading import create_data
-from dagshub.fastai import DAGsHubLogger
-
-
-def compute_errors(targ, pred):
-    thresh = torch.max((targ / pred), (pred / targ)).numpy()
-    a1 = (thresh < 1.25).mean()
-    a2 = (thresh < 1.25 ** 2).mean()
-    a3 = (thresh < 1.25 ** 3).mean()
-
-    abs_rel = (torch.abs(targ - pred) / targ).mean().item()
-    sq_rel = torch.mean(((targ - pred).pow(2)) / targ).item()
-
-    rmse = torch.sqrt((targ - pred).pow(2).mean()).item()
-
-    rmse_log = torch.sqrt((torch.log(1 + targ) - torch.log(1 + pred)).pow(2).mean()).item()
-
-    err = torch.log(1 + pred) - torch.log(1 + targ)
-    silog = torch.sqrt(torch.mean(err.pow(2)) - torch.mean(err).pow(2)).item() * 100
-
-    log_10 = (torch.abs(torch.log10(1 + targ) - torch.log10(1 + pred))).mean().item()
-    return dict(a1=a1,
-                a2=a2,
-                a3=a3,
-                abs_rel=abs_rel,
-                sq_rel=sq_rel,
-                rmse=rmse,
-                rmse_log=rmse_log,
-                silog=silog,
-                log_10=log_10)
+from src.code.eval_metric_calculation import compute_eval_metrics
+from dagshub import dagshub_logger
 
 
 if __name__ == "__main__":
@@ -51,5 +23,21 @@ if __name__ == "__main__":
                            path='src/',
                            model_dir='models')
     learner = learner.load('model')
-    predictions, targets = learner.get_preds(dl=test_dl)
-    print(compute_errors(targets, predictions))
+    inputs, predictions, targets, decoded = learner.get_preds(dl=test_dl,
+                                                              with_input=True,
+                                                              with_decoded=True)
+    # FastAI magic to retrieve image values
+    inputs = (inputs,)
+    decoded_predictions = learner.dls.decode(inputs + tuplify(decoded))[1]
+    decoded_targets = learner.dls.decode(inputs + tuplify(targets))[1]
+
+    metrics = compute_eval_metrics(decoded_targets.numpy(), decoded_predictions.numpy())
+
+    with dagshub_logger(
+            metrics_path="logs/test_metrics.csv",
+            should_log_hparams=False
+    ) as logger:
+        # Metric logging
+        logger.log_metrics(metrics)
+
+    print("Evaluation Done!")

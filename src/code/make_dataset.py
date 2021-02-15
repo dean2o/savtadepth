@@ -65,8 +65,9 @@ def convert_image(index, depth_map, img, output_folder):
     """
 
     # Normalize the depth image
-    normalized_depth = cv2.normalize(depth_map, None, 0, 255, cv2.NORM_MINMAX)
-    cv2.imwrite("%s/%05d_depth.png" % (output_folder, index), normalized_depth)
+    # normalized_depth = cv2.normalize(depth_map, None, 0, 255, cv2.NORM_MINMAX)
+    img_depth = depth_map * 25.0
+    cv2.imwrite("%s/%05d_depth.png" % (output_folder, index), img_depth)
 
     # Adding black frame to original image
     img = img[:, :, ::-1]  # Flipping the image from RGB to BGR for opencv
