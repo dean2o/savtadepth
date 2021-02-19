@@ -1,3 +1,4 @@
+import yaml
 from fastai.vision.all import \
     DataLoaders, \
     delegates, \
@@ -7,7 +8,8 @@ from fastai.vision.all import \
     PILImageBW, \
     RandomSplitter, \
     Path, \
-    get_files
+    get_files, \
+    L
 
 
 class ImageImageDataLoaders(DataLoaders):
@@ -33,13 +35,24 @@ def get_y_fn(x):
     return y
 
 
-def create_data(data_path):
+def create_data(data_path, is_test=False):
+    with open(r"./src/code/params.yml") as f:
+        params = yaml.safe_load(f)
+
     filenames = get_files(data_path, extensions='.jpg')
     if len(filenames) == 0:
         raise ValueError("Could not find any files in the given path")
     dataset = ImageImageDataLoaders.from_label_func(data_path,
-                                                    seed=42,
-                                                    bs=4, num_workers=0,
+                                                    seed=int(params['seed']),
+                                                    bs=int(params['batch_size']),
+                                                    num_workers=int(params['num_workers']),
                                                     filenames=filenames,
                                                     label_func=get_y_fn)
+
+    if is_test:
+        filenames = get_files(Path(data_path), extensions='.jpg')
+        test_files = L([Path(i) for i in filenames])
+        test_dl = dataset.test_dl(test_files, with_labels=True)
+        return dataset, test_dl
+
     return dataset
