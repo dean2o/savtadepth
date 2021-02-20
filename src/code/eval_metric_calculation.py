@@ -1,5 +1,6 @@
 import numpy as np
-
+from PIL import Image
+from tqdm import tqdm
 
 def compute_errors(target, prediction):
     thresh = np.maximum((target / prediction), (prediction / target))
@@ -24,14 +25,11 @@ def compute_errors(target, prediction):
     return a1, a2, a3, abs_rel, sq_rel, rmse, rmse_log, silog, log_10
 
 
-def compute_eval_metrics(targets, predictions):
-    targets = targets / 25.0
-    predictions = predictions / 25.0
-
+def compute_eval_metrics(test_files):
     min_depth_eval = 1e-3
     max_depth_eval = 10
 
-    num_samples = predictions.shape[0]
+    num_samples = len(test_files)
 
     a1 = np.zeros(num_samples, np.float32)
     a2 = np.zeros(num_samples, np.float32)
@@ -43,21 +41,31 @@ def compute_eval_metrics(targets, predictions):
     silog = np.zeros(num_samples, np.float32)
     log10 = np.zeros(num_samples, np.float32)
 
-    for i in range(num_samples):
-        target_depth = targets[i]
-        prediction_depth = predictions[i]
+    for i in tqdm(range(num_samples), desc="Calculating metrics for test data", total=num_samples):
+        sample_path = test_files[i]
+        target_path = str(sample_path.parent/(sample_path.stem + "_depth.png"))
+        pred_path = "src/eval/" + str(sample_path.stem) + "_pred.png"
 
-        prediction_depth[prediction_depth < min_depth_eval] = min_depth_eval
-        prediction_depth[prediction_depth > max_depth_eval] = max_depth_eval
-        prediction_depth[np.isinf(prediction_depth)] = max_depth_eval
+        target_image = Image.open(target_path)
+        pred_image = Image.open(pred_path)
 
-        target_depth[np.isinf(target_depth)] = 0
-        target_depth[np.isnan(target_depth)] = 0
+        target = np.asarray(target_image)
+        pred = np.asarray(pred_image)
 
-        valid_mask = np.logical_and(target_depth > min_depth_eval, target_depth < max_depth_eval)
+        target = target / 25.0
+        pred = pred / 25.0
+
+        pred[pred < min_depth_eval] = min_depth_eval
+        pred[pred > max_depth_eval] = max_depth_eval
+        pred[np.isinf(pred)] = max_depth_eval
+
+        target[np.isinf(target)] = 0
+        target[np.isnan(target)] = 0
+
+        valid_mask = np.logical_and(target > min_depth_eval, target < max_depth_eval)
 
         a1[i], a2[i], a3[i], abs_rel[i], sq_rel[i], rmse[i], rmse_log[i], silog[i], log10[i] = \
-            compute_errors(target_depth[valid_mask], prediction_depth[valid_mask])
+            compute_errors(target[valid_mask], pred[valid_mask])
 
     print("{:>7}, {:>7}, {:>7}, {:>7}, {:>7}, {:>7}, {:>7}, {:>7}, {:>7}".format(
         'd1', 'd2', 'd3', 'AbsRel', 'SqRel', 'RMSE', 'RMSElog', 'SILog', 'log10'))

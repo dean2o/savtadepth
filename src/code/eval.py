@@ -1,9 +1,12 @@
 import sys
 import yaml
-from fastai.vision.all import unet_learner, Path, resnet34, MSELossFlat, tuplify
+import torch
+from torchvision import transforms
+from fastai.vision.all import unet_learner, Path, resnet34, MSELossFlat, get_files, L, tuplify
 from custom_data_loading import create_data
 from eval_metric_calculation import compute_eval_metrics
 from dagshub import dagshub_logger
+from tqdm import tqdm
 
 
 if __name__ == "__main__":
@@ -15,7 +18,7 @@ if __name__ == "__main__":
         params = yaml.safe_load(f)
 
     data_path = Path(sys.argv[1])
-    data, test_dl = create_data(data_path, is_test=True)
+    data = create_data(data_path)
 
     arch = {'resnet34': resnet34}
     loss = {'MSELossFlat': MSELossFlat()}
@@ -28,20 +31,16 @@ if __name__ == "__main__":
                            model_dir='models')
     learner = learner.load('model')
 
-    print("Running model on test data...")
-    inputs = learner.get_preds(dl=test_dl,
-                               with_input=True,
-                               with_decoded=True,
-                               save_preds=Path('src/eval/preds'),
-                               save_targs=Path('src/eval/targs'))[0]
-    # FastAI magic to retrieve image values
-    print("Decoding test data...")
-    inputs = (inputs,)
-    decoded_predictions = learner.dls.decode(inputs + tuplify(decoded))[1]
-    decoded_targets = learner.dls.decode(inputs + tuplify(targets))[1]
+    filenames = get_files(Path(data_path), extensions='.jpg')
+    test_files = L([Path(i) for i in filenames])
+
+    for sample in tqdm(test_files.items, desc="Predicting on test images", total=len(test_files.items)):
+        pred = learner.predict(sample)[0]
+        pred = transforms.ToPILImage()(pred[:, :, :].type(torch.FloatTensor)).convert('L')
+        pred.save("src/eval/" + str(sample.stem) + "_pred.png")
 
     print("Calculating metrics...")
-    metrics = compute_eval_metrics(decoded_targets.numpy(), decoded_predictions.numpy())
+    metrics = compute_eval_metrics(test_files)
 
     with dagshub_logger(
             metrics_path="logs/test_metrics.csv",

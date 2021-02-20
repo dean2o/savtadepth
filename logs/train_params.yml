@@ -1,5 +1,5 @@
 DAGsHubLogger: true
-Learner: <fastai.learner.Learner object at 0x7f949b510cc0>
+Learner: <fastai.learner.Learner object at 0x7f051ecfcac8>
 ParamScheduler: true
 ProgressCallback: true
 Recorder: {add_time: true, train_metrics: false, valid_metrics: true}

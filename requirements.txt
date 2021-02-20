@@ -7,3 +7,4 @@ tqdm==4.52.0
 numpy==1.19.4
 scikit-learn==0.23.2
 dagshub==0.1.5
+tables==3.6.1

@@ -8,8 +8,7 @@ from fastai.vision.all import \
     PILImageBW, \
     RandomSplitter, \
     Path, \
-    get_files, \
-    L
+    get_files
 
 
 class ImageImageDataLoaders(DataLoaders):
@@ -35,7 +34,7 @@ def get_y_fn(x):
     return y
 
 
-def create_data(data_path, is_test=False):
+def create_data(data_path):
     with open(r"./src/code/params.yml") as f:
         params = yaml.safe_load(f)
 
@@ -48,11 +47,5 @@ def create_data(data_path, is_test=False):
                                                     num_workers=int(params['num_workers']),
                                                     filenames=filenames,
                                                     label_func=get_y_fn)
-
-    if is_test:
-        filenames = get_files(Path(data_path), extensions='.jpg')
-        test_files = L([Path(i) for i in filenames])
-        test_dl = dataset.test_dl(test_files, with_labels=True)
-        return dataset, test_dl
 
     return dataset
