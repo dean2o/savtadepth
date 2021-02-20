@@ -13,21 +13,33 @@ process_data:
     size: 2626
   outs:
   - path: src/data/processed/
-    md5: 38e5a1b51dfd29c0f313779b2f3d4540.dir
-    size: 234696354
+    md5: 9a1f43f46e8b1c387532e994e721d57d.dir
+    size: 197717291
     nfiles: 2898
 train:
-  cmd: python3 src/code/training.py src/data/processed
+  cmd: python3 src/code/training.py src/data/processed/train
   deps:
+  - path: src/code/custom_data_loading.py
+    md5: e04501397e3333bcec07eb8ef633b234
+    size: 2172
+  - path: src/code/params.yml
+    md5: 2263ca2167c1bb4b0f53a9aedb5f238e
+    size: 217
   - path: src/code/training.py
-    md5: 9634e85cffa3cf72d3d3d7739e40969e
-    size: 1645
-  - path: src/data/processed/
-    md5: d98a9647a37ab431bfa35815eb4afda0.dir
-    size: 232903470
-    nfiles: 2898
+    md5: e3dff7f4b59e4ebf818d7631d3e6803a
+    size: 1683
+  - path: src/data/processed/train
+    md5: 9956d748dcadc3abadd1ff966a6e2b92.dir
+    size: 109120921
+    nfiles: 1590
   outs:
+  - path: logs/train_metrics.csv
+    md5: 3504c0db314c5d285f3254f198a85a09
+    size: 103963
+  - path: logs/train_params.yml
+    md5: a2663346b17d042e5da48991fcf62771
+    size: 886
   - path: src/models/
-    md5: 18d26ed378b1b5ac61425afe153fc076.dir
-    size: 494926829
+    md5: 8969d16fb5b908cbfb6b54dffbf20efc.dir
+    size: 494926837
     nfiles: 1

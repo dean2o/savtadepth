@@ -29,10 +29,13 @@ if __name__ == "__main__":
     learner = learner.load('model')
 
     print("Running model on test data...")
-    inputs, predictions, targets, decoded = learner.get_preds(dl=test_dl,
-                                                              with_input=True,
-                                                              with_decoded=True)
+    inputs = learner.get_preds(dl=test_dl,
+                               with_input=True,
+                               with_decoded=True,
+                               save_preds=Path('src/eval/preds'),
+                               save_targs=Path('src/eval/targs'))[0]
     # FastAI magic to retrieve image values
+    print("Decoding test data...")
     inputs = (inputs,)
     decoded_predictions = learner.dls.decode(inputs + tuplify(decoded))[1]
     decoded_targets = learner.dls.decode(inputs + tuplify(targets))[1]
