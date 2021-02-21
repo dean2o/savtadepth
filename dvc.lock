@@ -34,14 +34,14 @@ train:
     nfiles: 1590
   outs:
   - path: logs/train_metrics.csv
-    md5: 236c1037c1732257bce15269c985ea12
-    size: 103920
+    md5: f9c97a7224444def38e5df5ecfd3d55e
+    size: 1256463
   - path: logs/train_params.yml
-    md5: 7d007007c4e8161b15b84475bade01f4
-    size: 886
+    md5: d3a44d36bffe5e02f2c0694446bd06fc
+    size: 887
   - path: src/models/
-    md5: 3f317ef8d5f3397f48d3e6f0ff261c0a.dir
-    size: 494927155
+    md5: a6a861609f11cfd8365a49a27482729a.dir
+    size: 494927324
     nfiles: 1
 eval:
   cmd: python3 src/code/eval.py src/data/processed/test
@@ -63,9 +63,9 @@ eval:
     size: 88596370
     nfiles: 1308
   - path: src/models/model.pth
-    md5: 4bcf7173ec76d0e3338d3c4a8dc2f1b2
-    size: 494927155
+    md5: e296d850af2e0a6c49173e239f75896f
+    size: 494927324
   outs:
   - path: logs/test_metrics.csv
-    md5: 8a8ab43eeef5f299a8577dbce546b418
-    size: 338
+    md5: 763c4cbc992a474e0f0be28f5a9f9642
+    size: 340
