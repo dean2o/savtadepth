@@ -4,7 +4,7 @@ batch_size: 4
 num_workers: 0
 weight_decay: 1e-2
 learning_rate: 1e-3
-epochs: 1
+epochs: 10
 num_outs: 3
 source_dir: src
 model_dir: models
