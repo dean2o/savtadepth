@@ -34,10 +34,14 @@ if __name__ == "__main__":
     filenames = get_files(Path(data_path), extensions='.jpg')
     test_files = L([Path(i) for i in filenames])
 
-    for sample in tqdm(test_files.items, desc="Predicting on test images", total=len(test_files.items)):
+    for i, sample in tqdm(enumerate(test_files.items),
+                          desc="Predicting on test images",
+                          total=len(test_files.items)):
         pred = learner.predict(sample)[0]
         pred = transforms.ToPILImage()(pred[:, :, :].type(torch.FloatTensor)).convert('L')
         pred.save("src/eval/" + str(sample.stem) + "_pred.png")
+        if i < 10:
+            pred.save("src/eval/examples/" + str(sample.stem) + "_pred.png")
 
     print("Calculating metrics...")
     metrics = compute_eval_metrics(test_files)

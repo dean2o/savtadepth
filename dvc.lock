@@ -23,7 +23,7 @@ train:
     md5: c94ea029ed76ca94bb1ad4c1655e5e68
     size: 1916
   - path: src/code/params.yml
-    md5: f1b2e4ff61e3f3fd8315f6c2c093bd49
+    md5: 88b982495a09b6d9355903e31e0b3b3f
     size: 218
   - path: src/code/training.py
     md5: e3dff7f4b59e4ebf818d7631d3e6803a
@@ -34,13 +34,13 @@ train:
     nfiles: 1590
   outs:
   - path: logs/train_metrics.csv
-    md5: f9c97a7224444def38e5df5ecfd3d55e
-    size: 1256463
+    md5: 15b14c6b8a3c310a7149b3f1bac5d86f
+    size: 5920790
   - path: logs/train_params.yml
-    md5: d3a44d36bffe5e02f2c0694446bd06fc
+    md5: 4d148d75cab3dbaa91ec5fccb3382541
     size: 887
   - path: src/models/
-    md5: a6a861609f11cfd8365a49a27482729a.dir
+    md5: 8586da76f372efa83d832a9d0e664817.dir
     size: 494927324
     nfiles: 1
 eval:
@@ -50,22 +50,26 @@ eval:
     md5: c94ea029ed76ca94bb1ad4c1655e5e68
     size: 1916
   - path: src/code/eval.py
-    md5: 040f2acb41b03bf92b6815bb99652f10
-    size: 1767
+    md5: 96288cbac461831e15ee95abcb8689e4
+    size: 1929
   - path: src/code/eval_metric_calculation.py
     md5: 2fc866e1107042a996087d5716d44bf0
     size: 2999
   - path: src/code/params.yml
-    md5: f1b2e4ff61e3f3fd8315f6c2c093bd49
+    md5: 88b982495a09b6d9355903e31e0b3b3f
     size: 218
   - path: src/data/processed/test
     md5: bcccd66f3f561b53ba97c89a558c08a0.dir
     size: 88596370
     nfiles: 1308
   - path: src/models/model.pth
-    md5: e296d850af2e0a6c49173e239f75896f
+    md5: f421fb113498c7186fb734928484e013
     size: 494927324
   outs:
   - path: logs/test_metrics.csv
-    md5: 763c4cbc992a474e0f0be28f5a9f9642
-    size: 340
+    md5: 126ddeb2a473b7e426cdf69fb86f4dac
+    size: 343
+  - path: src/eval/examples/
+    md5: f5ba3c3c4fcef9af37b0a78daa22a33f.dir
+    size: 425589
+    nfiles: 10
