@@ -50,8 +50,8 @@ eval:
     md5: c94ea029ed76ca94bb1ad4c1655e5e68
     size: 1916
   - path: src/code/eval.py
-    md5: fcc66ed80bb4466ab0438f556acd125c
-    size: 1775
+    md5: 9ea6a6624fa14f15b4d51f9139395663
+    size: 1893
   - path: src/code/eval_metric_calculation.py
     md5: 2fc866e1107042a996087d5716d44bf0
     size: 2999
@@ -67,5 +67,9 @@ eval:
     size: 494927196
   outs:
   - path: logs/test_metrics.csv
-    md5: 0add355c58eb4dfa1ae7e28e47750d33
-    size: 340
+    md5: 80d51ef1a70b1314947919a5c37f3220
+    size: 341
+  - path: src/eval/examples/
+    md5: cc137b33b5f5930e304b0b65f4b546ca.dir
+    size: 759235
+    nfiles: 10

@@ -31,6 +31,8 @@ stages:
     - src/code/eval.py
     - src/models/model.pth
     - src/data/processed/test
+    outs:
+    - src/eval/examples/
     metrics:
     - logs/test_metrics.csv:
         cache: false
