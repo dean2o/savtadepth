@@ -2,7 +2,7 @@ import sys
 import yaml
 import torch
 from torchvision import transforms
-from fastai.vision.all import unet_learner, Path, resnet34, MSELossFlat, get_files, L, tuplify
+from fastai.vision.all import unet_learner, Path, resnet34, MSELossFlat, get_files, L, PILImageBW
 from custom_data_loading import create_data
 from eval_metric_calculation import compute_eval_metrics
 from dagshub import dagshub_logger
@@ -34,10 +34,14 @@ if __name__ == "__main__":
     filenames = get_files(Path(data_path), extensions='.jpg')
     test_files = L([Path(i) for i in filenames])
 
-    for sample in tqdm(test_files.items, desc="Predicting on test images", total=len(test_files.items)):
+    for i, sample in tqdm(enumerate(test_files.items),
+                          desc="Predicting on test images",
+                          total=len(test_files.items)):
         pred = learner.predict(sample)[0]
-        pred = transforms.ToPILImage()(pred[:, :, :].type(torch.FloatTensor)).convert('L')
+        pred = PILImageBW.create(pred).convert('L')
         pred.save("src/eval/" + str(sample.stem) + "_pred.png")
+        if i < 10:
+            pred.save("src/eval/examples/" + str(sample.stem) + "_pred.png")
 
     print("Calculating metrics...")
     metrics = compute_eval_metrics(test_files)
